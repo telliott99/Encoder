@@ -1,3 +1,5 @@
+got a crash with My message, mysecret
+
 figure out correct way to turn 0xff into 255
 
 make display smarter, currently interrupts words

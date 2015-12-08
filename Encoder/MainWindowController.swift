@@ -10,7 +10,6 @@ class MainWindowController: NSWindowController {
     let defaultText = "MY SECRET IS REALLY REALLY SECRET"
     let defaultKey = "Four score and seven years ago"
     var currentData = BinaryData()
-    let lineLength = 40
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -24,11 +23,14 @@ class MainWindowController: NSWindowController {
     
     func displayCurrentData() {
         let s = binaryFormat(currentData, limit: 16)
-        dataTextField.stringValue = s
+        let fs = formatForScreen(s)
+        dataTextField.stringValue = fs
     }
     
     func displayDecodedData(decodedData: BinaryData) {
         let s = binaryDataToString(decodedData)
+        // s.stripNewlines()
+        // let fs = formatForScreen(s)
         displayText(decodedTextField, s)
     }
     
@@ -60,8 +62,8 @@ class MainWindowController: NSWindowController {
     }
     
     func displayText(tf: NSTextField, _ s: String) {
-        tf.stringValue = s.insertSeparator("\n",
-            every: lineLength)
+        let fs = formatForScreen(s)
+        tf.stringValue = fs
     }
     
     @IBAction func loadData(sender: AnyObject) {

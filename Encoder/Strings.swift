@@ -40,11 +40,12 @@ extension String {
         return ret
     }
     
-    
+    /*
     func insertSeparator(sep: String, every n: Int) -> String {
         let ret = self.divideStringIntoChunks(chunkSize: n)
         return ret.joinWithSeparator(sep)
     }
+    */
     
     func stripOccurrencesOfCharactersInList(cL: CharacterView) -> String {
         /*
@@ -69,4 +70,38 @@ extension String {
         let cL = "\n".characters
         return self.stripOccurrencesOfCharactersInList(cL)
     }
+}
+
+func formatForScreen(s: String, length n: Int = 50) -> String {
+    func countEm(a: [String]) -> Int {
+        var count = 0
+        for s in a {
+            count += s.characters.count + 1
+        }
+        return count
+    }
+    var sa = s.characters.split{$0 == " "}.map { String($0) }
+    var result: [[String]] = []
+    var tmp: [String] = []
+    
+    // assumes no string is > n in length
+    while true {
+        if sa.count == 0 {
+            result.append(tmp)
+            break
+        }
+        
+        let next = sa.removeFirst()
+        Swift.print(next)
+        
+        if countEm(tmp) + next.characters.count >= n {
+            Swift.print("appending \(tmp)")
+            result.append(tmp)
+            tmp = []
+        }
+        tmp.append(next)
+    }
+    
+    let ret = result.map { $0.joinWithSeparator(" ") }
+    return ret.joinWithSeparator("\n")
 }

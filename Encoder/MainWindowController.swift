@@ -24,7 +24,7 @@ class MainWindowController: NSWindowController {
     
     func displayCurrentData() {
         let s = binaryFormat(currentData, limit: 16)
-        dataTextField.stringValue = s + " ..."
+        dataTextField.stringValue = s
     }
     
     func displayDecodedData(decodedData: BinaryData) {

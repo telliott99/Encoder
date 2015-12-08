@@ -17,6 +17,9 @@ func loadDataFileHandler() -> BinaryData? {
     }
     
     let data = NSData(contentsOfURL:op.URL!)
+    if nil == data { return nil }
+    
+    /*
     let stringBytes = chunks(String(data!),2)
     // Swift.print(stringBytes)
     
@@ -25,8 +28,11 @@ func loadDataFileHandler() -> BinaryData? {
 
     let D = dictionaryBytesToInts()
     let bytes = stringBytes.map { UInt8(D[$0]!) }
-    // Swift.print(bytes)
     
+    // Swift.print(bytes)
+    */
+    
+    let bytes = dataToBinaryData(data!)
     return bytes
 }
 

@@ -1,6 +1,9 @@
 got a crash with My message, mysecret
+bad access in ..
+FIXED
 
 figure out correct way to turn 0xff into 255
+FIXED
 
 make display smarter, currently interrupts words
 

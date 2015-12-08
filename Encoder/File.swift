@@ -1,59 +1,43 @@
 import Cocoa
 
-func loadDataFileHandler() -> BinaryData? {
+func runOpenPanel(allowedFileTypes: String,
+                  prompt: String) -> NSURL? {
     let op = NSOpenPanel()
-    op.prompt = "Open Data File:"
+    op.prompt = prompt
     op.allowsMultipleSelection = false
     // op.canChooseDirectories = true  // default
     op.resolvesAliases = true
-    op.allowedFileTypes = ["bin"]
-    
+    op.allowedFileTypes = [allowedFileTypes]
     let home = NSHomeDirectory()
     let d = home.stringByAppendingString("/Desktop/")
     op.directoryURL = NSURL(string: d)
     op.runModal()
-    if op.URL == nil {
+    return op.URL
+}
+
+func loadDataFileHandler() -> BinaryData? {
+    let url = runOpenPanel("bin", prompt: "Open Data File:")
+    if url == nil {
         return nil
     }
-    
-    let data = NSData(contentsOfURL:op.URL!)
-    if nil == data { return nil }
-    
-    /*
-    let stringBytes = chunks(String(data!),2)
-    // Swift.print(stringBytes)
-    
-    // we convert "a3" to 163, etc.
-    // not how this should be done!!
-
-    let D = dictionaryBytesToInts()
-    let bytes = stringBytes.map { UInt8(D[$0]!) }
-    
-    // Swift.print(bytes)
-    */
-    
+    let data = NSData(contentsOfURL:url!)
+    if nil == data {
+        return nil
+    }
     let bytes = dataToBinaryData(data!)
     return bytes
 }
 
 func loadTextFileHandler() -> String? {
-    let op = NSOpenPanel()
-    op.prompt = "Open Text File:"
-    op.allowsMultipleSelection = false
-    // op.canChooseDirectories = true  // default
-    op.resolvesAliases = true
-    op.allowedFileTypes = ["txt"]
-    
-    let home = NSHomeDirectory()
-    let d = home.stringByAppendingString("/Desktop/")
-    op.directoryURL = NSURL(string: d)
-    op.runModal()
-    if op.URL == nil {
+    let url = runOpenPanel("txt", prompt: "Open Text File:")
+    if url == nil {
         return nil
     }
     var s: String = ""
     do {
-        s = try String(contentsOfURL:op.URL!, encoding: NSUTF8StringEncoding)
+        s = try String(
+            contentsOfURL:url!,
+            encoding: NSUTF8StringEncoding)
     }
     catch {
         return nil
@@ -61,45 +45,40 @@ func loadTextFileHandler() -> String? {
     return s
 }
 
-func saveFileHandler(currentData: BinaryData) -> Bool {
+func runSavePanel(allowedFileTypes: String,
+    prompt: String) -> NSURL? {
     let sp = NSSavePanel()
-    sp.prompt = "Save Data To File:"
+    sp.prompt = prompt
     // op.canChooseDirectories = true  // default
-    sp.allowedFileTypes = ["bin"]
-    
+    sp.allowedFileTypes = [allowedFileTypes]
     let home = NSHomeDirectory()
     let d = home.stringByAppendingString("/Desktop/")
     sp.directoryURL = NSURL(string: d)
     sp.runModal()
-    if sp.URL == nil {
+    return sp.URL
+}
+
+func saveFileHandler(currentData: BinaryData) -> Bool {
+    let url = runSavePanel("bin", prompt: "Save Data To File:")
+    if url == nil {
         return false
     }
-    
     let data = NSData(bytes: currentData,
         length: currentData.count)
-    data.writeToURL(sp.URL!, atomically: true)
+    data.writeToURL(url!, atomically: true)
     
     return true
 }
 
 func saveDecodedTextFileHandler(decodedText: String) -> Bool {
-    Swift.print("saveDecodedText \(decodedText)")
-    let sp = NSSavePanel()
-    sp.prompt = "Save Data To File:"
-    // op.canChooseDirectories = true  // default
-    sp.allowedFileTypes = ["txt"]
-    
-    let home = NSHomeDirectory()
-    let d = home.stringByAppendingString("/Desktop/")
-    sp.directoryURL = NSURL(string: d)
-    sp.runModal()
-    if sp.URL == nil {
+    let url = runSavePanel("txt",
+              prompt: "Save Decoded Text: ")
+    if url == nil {
         return false
     }
-    
     do {
             try decodedText.writeToURL(
-            sp.URL!,
+            url!,
             atomically: true,
             encoding: NSUTF8StringEncoding)
     }

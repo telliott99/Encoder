@@ -81,3 +81,31 @@ func saveFileHandler(currentData: BinaryData) -> Bool {
     
     return true
 }
+
+func saveDecodedTextFileHandler(decodedText: String) -> Bool {
+    Swift.print("saveDecodedText \(decodedText)")
+    let sp = NSSavePanel()
+    sp.prompt = "Save Data To File:"
+    // op.canChooseDirectories = true  // default
+    sp.allowedFileTypes = ["txt"]
+    
+    let home = NSHomeDirectory()
+    let d = home.stringByAppendingString("/Desktop/")
+    sp.directoryURL = NSURL(string: d)
+    sp.runModal()
+    if sp.URL == nil {
+        return false
+    }
+    
+    do {
+            try decodedText.writeToURL(
+            sp.URL!,
+            atomically: true,
+            encoding: NSUTF8StringEncoding)
+    }
+    catch {
+        return false
+    }
+    return true
+}
+

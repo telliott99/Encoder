@@ -5,12 +5,14 @@ class Encoder {
     let i: UInt32
     init(_ input: String) {
         key = input
+        
         // total hack, need String -> UInt32
         var n = Int(key.hashValue)
         if n < 0 { n *= -1 }
         let maxI = Int(UInt32.max)
         if n >= maxI { n = n % maxI }
         i = UInt32(n)
+        
         seed()
     }
     func seed() {

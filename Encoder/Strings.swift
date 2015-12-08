@@ -72,6 +72,13 @@ extension String {
     }
 }
 
+/*
+break a string into words
+form the words into lines of a max length
+do this by looking ahead to see if we go over length
+if so, flush the buffer
+*/
+
 func formatForScreen(s: String, length n: Int = 50) -> String {
     func countEm(a: [String]) -> Int {
         var count = 0
@@ -82,24 +89,24 @@ func formatForScreen(s: String, length n: Int = 50) -> String {
     }
     var sa = s.characters.split{$0 == " "}.map { String($0) }
     var result: [[String]] = []
-    var tmp: [String] = []
+    var buffer: [String] = []
     
     // assumes no string is > n in length
     while true {
         if sa.count == 0 {
-            result.append(tmp)
+            result.append(buffer)
             break
         }
         
         let next = sa.removeFirst()
-        Swift.print(next)
+        // Swift.print(next)
         
-        if countEm(tmp) + next.characters.count >= n {
-            Swift.print("appending \(tmp)")
-            result.append(tmp)
-            tmp = []
+        if countEm(buffer) + next.characters.count >= n {
+            // Swift.print("appending \(buffer)")
+            result.append(buffer)
+            buffer = []
         }
-        tmp.append(next)
+        buffer.append(next)
     }
     
     let ret = result.map { $0.joinWithSeparator(" ") }

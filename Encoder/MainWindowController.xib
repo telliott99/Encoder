@@ -95,9 +95,9 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Npd-LI-eak">
-                        <rect key="frame" x="30" y="86" width="91" height="17"/>
+                        <rect key="frame" x="30" y="86" width="88" height="17"/>
                         <animations/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Decoded Data" id="Oa1-LZ-TF1">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Decoded Text" id="Oa1-LZ-TF1">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -156,6 +156,17 @@
                         </buttonCell>
                         <connections>
                             <action selector="loadText:" target="-2" id="qBy-4I-qwe"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gny-p3-rU3">
+                        <rect key="frame" x="182" y="79" width="85" height="32"/>
+                        <animations/>
+                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DYE-h6-A8I">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="saveDecodedText:" target="-2" id="eti-md-TeM"/>
                         </connections>
                     </button>
                 </subviews>

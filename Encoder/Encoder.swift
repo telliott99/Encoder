@@ -1,48 +1,41 @@
 import Foundation
 
-func intForKey1(k: String) -> UInt32 {
-    // total hack, need String -> UInt32
-    var n = Int(k.hashValue)
-    if n < 0 { n *= -1 }
-    let maxI = Int(UInt32.max)
-    if n >= maxI { n = n % maxI }
-    return UInt32(n)
-}
-
-func intForKey2(k: String) -> UInt32 {
-    let lc = "abcdefghijklmnopqrstuvwxyz"
-    let uc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    let letters = lc + uc
-    let cL = Array(letters.characters)
-    var n = 0
-    var j = 0
-    
-    for c in k.characters {
-        j += 1
-        if !cL.contains(c) {
-            continue
-        } else {
-            var index = cL.indexOf(c)!
-            let multiplier = 26 * (j + 1)
-            index *= multiplier
-            n += index
-        }
-    }
-    let maxI = Int(UInt32.max)
-    if n >= maxI { n = n % maxI }
-    return UInt32(n)
-}
-
 class Encoder {
+    
     let key: String
-    let i: UInt32
+    var i: UInt32
+    
     init(_ input: String) {
         key = input
-        i = intForKey1(input)
-        seed()
+        i = 0
+    }
+    
+    func intForKey1(k: String) -> UInt32 {
+        // total hack, need String -> UInt32
+        var n = Int(k.hashValue)
+        if n < 0 { n *= -1 }
+        let maxI = Int(UInt32.max)
+        if n >= maxI { n = n % maxI }
+        return UInt32(n)
+    }
+    
+    func intForKey2(k: String) -> UInt32 {
+        var n = 0
+        // we can convert the utf8 to [UInt8], amazing!
+        var data = BinaryData(k.utf8)
+        // so as not to throw away the first utf8 byte
+        data.insert(0, atIndex: 0)
+        for (i,value) in data.enumerate() {
+            if i == 0 { continue }
+            n += i * Int(value)
+        }
+        let maxI = Int(UInt32.max)
+        if n >= maxI { n = n % maxI }
+        return UInt32(n)
     }
     
     func seed() {
+        i = intForKey2(key)
         srand(i)
     }
     

@@ -1,6 +1,6 @@
 import Foundation
 
-func chunks(s: String, _ size: Int) -> [String] {
+func chunks(_ s: String, _ size: Int) -> [String] {
     var ret: [String] = []
     var current = ""
     var i = 0
@@ -32,10 +32,10 @@ extension String {
                 ret.append(current)
                 break
             }
-            let i = current.startIndex.advancedBy(n)
-            let front = current.substringToIndex(i)
+            let i = current.characters.index(current.startIndex, offsetBy: n)
+            let front = current.substring(to: i)
             ret.append(front)
-            current = current.substringFromIndex(i)
+            current = current.substring(from: i)
         }
         return ret
     }
@@ -47,7 +47,7 @@ extension String {
     }
     */
     
-    func stripOccurrencesOfCharactersInList(cL: CharacterView) -> String {
+    func stripOccurrencesOfCharactersInList(_ cL: CharacterView) -> String {
         /*
         get the CharacterView, like an [Character]
         split to chunks on newlines, takes a closure
@@ -63,7 +63,7 @@ extension String {
             }
             a.append(c)
         }
-        return a.map{String($0)}.joinWithSeparator("")
+        return a.map{String($0)}.joined(separator: "")
     }
     
     func stripNewlines() -> String {
@@ -79,8 +79,8 @@ do this by looking ahead to see if we go over length
 if so, flush the buffer
 */
 
-func formatForScreen(s: String, length n: Int = 50) -> String {
-    func countEm(a: [String]) -> Int {
+func formatForScreen(_ s: String, length n: Int = 50) -> String {
+    func countEm(_ a: [String]) -> Int {
         var count = 0
         for s in a {
             count += s.characters.count + 1
@@ -109,6 +109,6 @@ func formatForScreen(s: String, length n: Int = 50) -> String {
         buffer.append(next)
     }
     
-    let ret = result.map { $0.joinWithSeparator(" ") }
-    return ret.joinWithSeparator("\n")
+    let ret = result.map { $0.joined(separator: " ") }
+    return ret.joined(separator: "\n")
 }

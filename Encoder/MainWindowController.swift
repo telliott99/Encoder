@@ -28,7 +28,7 @@ class MainWindowController: NSWindowController {
         dataTextField.stringValue = fs
     }
     
-    func displayDecodedData(decodedData: BinaryData) {
+    func displayDecodedData(_ decodedData: BinaryData) {
         decodedText = binaryDataToString(decodedData)
         // s.stripNewlines()
         // let fs = formatForScreen(s)
@@ -40,10 +40,10 @@ class MainWindowController: NSWindowController {
         return Encoder(k)
     }
     
-    @IBAction func encode(sender: AnyObject) {
+    @IBAction func encode(_ sender: AnyObject) {
         let p = plainTextField.stringValue
         // Swift.print(p)
-        p.stripNewlines()
+        _ = p.stripNewlines()
         let data = plaintextStringToIntArray(p)
         
         let encoder = getEncoder()
@@ -52,17 +52,17 @@ class MainWindowController: NSWindowController {
         decodedTextField.stringValue = ""
     }
     
-    @IBAction func decode(sender: AnyObject) {
+    @IBAction func decode(_ sender: AnyObject) {
         let decoder = getEncoder()
         let decodedData = decoder.decode(currentData)
         displayDecodedData(decodedData)
     }
     
-    @IBAction func saveData(sender: AnyObject) {
+    @IBAction func saveData(_ sender: AnyObject) {
         let _ = saveFileHandler(currentData)
     }
     
-    func displayText(tf: NSTextField, _ s: String) {
+    func displayText(_ tf: NSTextField, _ s: String) {
         let fs = formatForScreen(s)
         tf.stringValue = fs
     }
@@ -73,7 +73,7 @@ class MainWindowController: NSWindowController {
         plainTextField.stringValue = ""
     }
     
-    @IBAction func loadData(sender: AnyObject) {
+    @IBAction func loadData(_ sender: AnyObject) {
         let data = loadDataFileHandler()
         if nil == data { return }
         currentData = data!
@@ -81,7 +81,7 @@ class MainWindowController: NSWindowController {
         resetAllTextFields()
     }
     
-    @IBAction func loadText(sender: AnyObject) {
+    @IBAction func loadText(_ sender: AnyObject) {
         let s = loadTextFileHandler()
         if nil == s { return }
         decodedTextField.stringValue = ""
@@ -89,7 +89,7 @@ class MainWindowController: NSWindowController {
         displayText(plainTextField, s!)
     }
     
-    @IBAction func saveDecodedText(sender: AnyObject) {
-        saveDecodedTextFileHandler(decodedText)
+    @IBAction func saveDecodedText(_ sender: AnyObject) {
+        _ = saveDecodedTextFileHandler(decodedText)
     }
 }

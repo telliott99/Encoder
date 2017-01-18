@@ -11,6 +11,7 @@
 		751481691C15B97B00821A87 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 751481671C15B97B00821A87 /* MainWindowController.xib */; };
 		7514816D1C15BD1600821A87 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7514816C1C15BD1600821A87 /* Encoder.swift */; };
 		751481711C15BD5900821A87 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751481701C15BD5900821A87 /* Data.swift */; };
+		752F8E941E2FB9C600C13789 /* RandFW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752F8E931E2FB9C600C13789 /* RandFW.framework */; };
 		7558D91E1C15CC44000E5909 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558D91D1C15CC44000E5909 /* File.swift */; };
 		755FEDF11C15D5DE00AB99E9 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755FEDF01C15D5DE00AB99E9 /* Strings.swift */; };
 		75F6DED51C15B8ED0026F001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F6DED41C15B8ED0026F001 /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 		751481671C15B97B00821A87 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		7514816C1C15BD1600821A87 /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 		751481701C15BD5900821A87 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		752F8E931E2FB9C600C13789 /* RandFW.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RandFW.framework; path = ../../Library/Frameworks/RandFW.framework; sourceTree = "<group>"; };
 		7558D91D1C15CC44000E5909 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		755FEDF01C15D5DE00AB99E9 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		75F6DED11C15B8ED0026F001 /* Encoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				752F8E941E2FB9C600C13789 /* RandFW.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		752F8E921E2FB9C600C13789 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				752F8E931E2FB9C600C13789 /* RandFW.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		75F6DEC81C15B8ED0026F001 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +100,7 @@
 				75F6DEE31C15B8ED0026F001 /* EncoderTests */,
 				75F6DEEE1C15B8ED0026F001 /* EncoderUITests */,
 				75F6DED21C15B8ED0026F001 /* Products */,
+				752F8E921E2FB9C600C13789 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,18 +212,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Tom Elliott";
 				TargetAttributes = {
 					75F6DED01C15B8ED0026F001 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0820;
 					};
 					75F6DEDF1C15B8ED0026F001 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 75F6DED01C15B8ED0026F001;
 					};
 					75F6DEEA1C15B8ED0026F001 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 75F6DED01C15B8ED0026F001;
 					};
 				};
@@ -333,8 +348,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -377,8 +394,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -397,6 +416,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -405,10 +425,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = Encoder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = te.Encoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -417,10 +442,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = Encoder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = te.Encoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -433,6 +463,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = te.EncoderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Encoder.app/Contents/MacOS/Encoder";
 			};
 			name = Debug;
@@ -446,6 +477,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = te.EncoderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Encoder.app/Contents/MacOS/Encoder";
 			};
 			name = Release;
@@ -458,6 +490,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = te.EncoderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Encoder;
 				USES_XCTRUNNER = YES;
 			};
@@ -471,6 +504,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = te.EncoderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Encoder;
 				USES_XCTRUNNER = YES;
 			};

@@ -1,7 +1,7 @@
 import Cocoa
 
-func runOpenPanel(allowedFileTypes: String,
-                  prompt: String) -> NSURL? {
+func runOpenPanel(_ allowedFileTypes: String,
+                  prompt: String) -> URL? {
     let op = NSOpenPanel()
     op.prompt = prompt
     op.allowsMultipleSelection = false
@@ -9,10 +9,10 @@ func runOpenPanel(allowedFileTypes: String,
     op.resolvesAliases = true
     op.allowedFileTypes = [allowedFileTypes]
     let home = NSHomeDirectory()
-    let d = home.stringByAppendingString("/Desktop/")
-    op.directoryURL = NSURL(string: d)
+    let d = home + "/Desktop/"
+    op.directoryURL = URL(string: d)
     op.runModal()
-    return op.URL
+    return op.url
 }
 
 func loadDataFileHandler() -> BinaryData? {
@@ -20,7 +20,7 @@ func loadDataFileHandler() -> BinaryData? {
     if url == nil {
         return nil
     }
-    let data = NSData(contentsOfURL:url!)
+    let data = try? Data(contentsOf: url!)
     if nil == data {
         return nil
     }
@@ -36,8 +36,8 @@ func loadTextFileHandler() -> String? {
     var s: String = ""
     do {
         s = try String(
-            contentsOfURL:url!,
-            encoding: NSUTF8StringEncoding)
+            contentsOf:url!,
+            encoding: String.Encoding.utf8)
     }
     catch {
         return nil
@@ -45,42 +45,42 @@ func loadTextFileHandler() -> String? {
     return s
 }
 
-func runSavePanel(allowedFileTypes: String,
-    prompt: String) -> NSURL? {
+func runSavePanel(_ allowedFileTypes: String,
+    prompt: String) -> URL? {
     let sp = NSSavePanel()
     sp.prompt = prompt
     // op.canChooseDirectories = true  // default
     sp.allowedFileTypes = [allowedFileTypes]
     let home = NSHomeDirectory()
-    let d = home.stringByAppendingString("/Desktop/")
-    sp.directoryURL = NSURL(string: d)
+    let d = home + "/Desktop/"
+    sp.directoryURL = URL(string: d)
     sp.runModal()
-    return sp.URL
+    return sp.url
 }
 
-func saveFileHandler(currentData: BinaryData) -> Bool {
+func saveFileHandler(_ currentData: BinaryData) -> Bool {
     let url = runSavePanel("bin", prompt: "Save Data To File:")
     if url == nil {
         return false
     }
-    let data = NSData(bytes: currentData,
-        length: currentData.count)
-    data.writeToURL(url!, atomically: true)
+    let data = Data(bytes: UnsafePointer<UInt8>(currentData),
+        count: currentData.count)
+    try? data.write(to: url!, options: [.atomic])
     
     return true
 }
 
-func saveDecodedTextFileHandler(decodedText: String) -> Bool {
+func saveDecodedTextFileHandler(_ decodedText: String) -> Bool {
     let url = runSavePanel("txt",
               prompt: "Save Decoded Text: ")
     if url == nil {
         return false
     }
     do {
-            try decodedText.writeToURL(
-            url!,
+            try decodedText.write(
+            to: url!,
             atomically: true,
-            encoding: NSUTF8StringEncoding)
+            encoding: String.Encoding.utf8)
     }
     catch {
         return false

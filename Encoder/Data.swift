@@ -16,7 +16,7 @@ called by:  displayCurrentData
 format data for display on screeen as ae 01 ff ...
 */
 
-func binaryFormat(input: BinaryData, limit: Int) -> String {
+func binaryFormat(_ input: BinaryData, limit: Int) -> String {
     // added length check here, but same problem
     // cannot subscript [String] ...  which I don't understand
     
@@ -32,7 +32,7 @@ func binaryFormat(input: BinaryData, limit: Int) -> String {
     let sa = ia.map { NSString(format: "%x", $0) as String }
     
     // couldn't figure this one out as map
-    func pad(s: String) -> String {
+    func pad(_ s: String) -> String {
         if s.characters.count == 2 { return s }
         return "0" + s
     }
@@ -43,7 +43,7 @@ func binaryFormat(input: BinaryData, limit: Int) -> String {
     
     //let ret = sa.map(pad)[0..<limit]
     
-    var s = sa.map(pad).joinWithSeparator(" ")
+    var s = sa.map(pad).joined(separator: " ")
     if tooLong { s += " ..." }
     
     return s
@@ -56,9 +56,9 @@ called by:  displayDecodedData
 convert decoded data back to String
 */
 
-func binaryDataToString(input: BinaryData) -> String {
-    let ret = input.map { String(Character(UnicodeScalar(UInt32($0)))) }
-    return ret.joinWithSeparator("")
+func binaryDataToString(_ input: BinaryData) -> String {
+    let ret = input.map { String(Character(UnicodeScalar(UInt32($0))!)) }
+    return ret.joined(separator: "")
 }
 
 /*
@@ -67,7 +67,7 @@ String -> BinaryData
 called by:  displayDecodedData
 */
 
-func plaintextStringToIntArray(s: String) -> BinaryData {
+func plaintextStringToIntArray(_ s: String) -> BinaryData {
     return s.utf8.map{ UInt8($0) }
 }
 
@@ -78,18 +78,18 @@ called by:  loadDataFileHandler
 */
 
 
-func dataToBinaryData(data: NSData) -> [UInt8] {
-    let stream = NSInputStream(data: data)
+func dataToBinaryData(_ data: Data) -> [UInt8] {
+    let stream = InputStream(data: data)
     stream.open()
     
     // having loaded data from a file
     // how to know how large a buffer we will need?
     // data knows its length !!
-    let n = data.length
+    let n = data.count
     
     var buffer = Array<UInt8>(
-        count: n * sizeof(UInt8),
-        repeatedValue: 0)
+        repeating: 0,
+        count: n * MemoryLayout<UInt8>.size)
     
     stream.read(&buffer, maxLength: n)
     return buffer
